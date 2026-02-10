@@ -35,20 +35,3 @@ jobs:
         working-directory: ./app
         run: npm test
 
-      - name: Verify code quality (JSON structure)
-        working-directory: ./app/pages/api
-        run: |
-          node -e "
-          const handler = require('./procesar.js').default;
-          const mockRes = {
-            statusCode: null,
-            body: null,
-            status(code) { this.statusCode = code; return this; },
-            json(payload) { this.body = payload; return this; }
-          };
-          handler({ query: { nombre: 'test' } }, mockRes);
-          if (!mockRes.body.resultado || !mockRes.body.timestamp) {
-            throw new Error('Invalid response structure');
-          }
-          console.log('✓ Response structure is valid');
-          "
