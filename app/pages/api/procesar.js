@@ -6,7 +6,7 @@ export default function handler(req, res) {
   }
 
   res.status(200).json({
-    resultado: `Nombre procesado: ${nombre.toLowerCase()}`,
+    resultado: `Nombre procesado: ${nombre.toUpperCase()}`,
     timestamp: new Date().toISOString()
   });
 }
